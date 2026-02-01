@@ -1,29 +1,37 @@
-name: Deploy Python App to EC2
-
-on:
-  push:
-    branches:
-      - main
-
+name: Deploy
+on: [push]
 jobs:
-  deploy:
+  ssh:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Deploy to EC2 Server
-        uses: appleboy/ssh-action@v1.0.0
+      - uses: appleboy/ssh-action@v1.0.0
         with:
-          host: 51.20.31.102
-          username: ec2-user
-          key: "pems-key"
-          script: |
-            if [ ! -d "my-repo" ]; then
-              git clone https://https://github.com/AbdullahcodeX/CI-CD_jenkins.git
-            fi
-            cd my-repo
-            git pull origin main
-            pkill -f python || true
-            python3 app.py &
+          host: "51.20.31.102"
+          username: "ec2-51-20-31-102.eu-north-1.compute.amazonaws.com"
+          key: "
+MIIEpQIBAAKCAQEAz1lDB2AfhQPivF1Y16ZarMPBoDiKUi284RL790EJpfZM4+IA
+e9qg/wd8Tgy83+s8pBjdcAtBM+I4RcLxy5nDzVTIkHrY2X1dMxoB4/D0JuhEdXwQ
+ighup/nzA1YnSC/v5JQbBoOW60Ft1aRrXLl40ZfIKIHsR0xyTLZ0EzD3E2Fg56t0
+IUbJvyfNCC4QJ6Nd0vgXjKOBNlpO+lOCpbIjB39Np/Q0JkoCdAJMk8+6uyGX7XRX
+avKPjTVkOkoZvlGQFcOBUQ+kRJuU6HGbQkeBobE16CsGT2of+aNjAFMM42JbJb/s
+jpNtIajlxaHq97bUk+Tgb956Yj+Shl2fUvp/zQIDAQABAoIBAQCHUhcHsjj/42hP
+TJCVtPDKfbtZKG1FcqopLe2ZES4NzO+jbbSpICcgKa97dJ6zeF+MLNofrIiyJrpY
+9QA+wyxhTirS+Amb71Aq8Jc5PuDon39GOWDF5Pjq0ZpCnDBo0Tg7sljs6GZPRNU8
+r+CNlFIAX5F2tkwQwBh8bjrU54jocOEzdnT033/g7vr0Q5S1Rer6kr0Hcsj/bfl6
+/z10ucms9VH03R+B/YvKtPt+KOblRjjQ/miDli7SeY09fb0j1Xr2mD1jNvX4+HMh
+gBB9qNl1N5PklrwzLHtoiB5wreQZ58qHtuue6aVDQA710CzRpBTX1Grx9BmcwR24
+P7JUdw/1AoGBAOubog312JTvfWaWUOfpcLeqQYu8zJs9QjEZ6yF/41UrBTh/ak3A
+mTLWPs8MBOXo3HwcrvrSly2NyvGTHAF7HULx0h5KBoKrsDgnwJtF0+smhE2d+8zD
+a+tbhps18V9dftHZScyITFtc5E9rBJPK6CO54kFzL8WLTgVDir94F6DrAoGBAOFL
+fPS9MgBB0b+mMNOnFm0zCh29auhgux9lpMNbEfOYMJzhoSzCr1iMQ4cvGUyTUjjX
+3kUOA1j95jcFRq3Km4Of7bMvzk5TjW7y0VIqtdngPnrRBNyVLStQ+Es35975rSOD
+uLpsiTTluK5hRofwWxYsILwY/jHTrVuTB/YNw/QnAoGBAIOfGlU6NphdgmzBJMmq
+O/IfBycNfjBrdIMBu72nOFToB66cX8K4Cd3Amq4IROQ7xpD/ZTFyXEpyoCF80XRy
+VtKDTaLmL+ToDTYR3yPfSphfmCHUVEr8EVoWc4haBlIEZUjOXtAIhL+1kUZcvt3h
+yPXMbn2p39I4FIoURXrZmDmpAoGBAJ/PhFu2uPkltztTD9+S7n2Xbt2Zt3QO6a1j
+1HQe7aT1l8Yw5rtxfiA5ns0Nw8xl1DUuKySgxA8kS2FMBM7SoW3EzEAG8TjuW60P
+4Rt/4G8kei10hxZRWzEWxonUpk2snfxLO4ZB5zH2ogJQTk+vV21q7+19bRK7LIWA
+zmzjZtSRAoGAdLTAn880MoTCQ7oTkBjRgU4+IhwMn4vqqwM8ppWcuDXzan0JeiGJ
+nBv8mqB2vU/WHPEmA3HNJLDPafT6VzguNRT965Cfj3VD2Py/n7mWsHBbVGwai4DJ
+dw6AgIN38lwYtuxmYra+FQwQbGwSPItI3jr3g69uxmLHtNMyJR4xnJk"
+          script: hostname
