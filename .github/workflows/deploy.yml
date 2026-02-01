@@ -16,9 +16,9 @@ jobs:
       - name: Deploy to EC2 Server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.EC2_HOST }}
+          host: 51.20.31.102
           username: ec2-user
-          key: ${{ secrets.EC2_SSH_KEY }}
+          key: "pems-key"
           script: |
             if [ ! -d "my-repo" ]; then
               git clone https://https://github.com/AbdullahcodeX/CI-CD_jenkins.git
