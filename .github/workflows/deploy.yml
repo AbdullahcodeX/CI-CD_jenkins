@@ -1,0 +1,29 @@
+name: Deploy Python App to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2 Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            if [ ! -d "my-repo" ]; then
+              git clone https://https://github.com/AbdullahcodeX/CI-CD_jenkins.git
+            fi
+            cd my-repo
+            git pull origin main
+            pkill -f python || true
+            python3 app.py &
